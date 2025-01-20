@@ -223,3 +223,71 @@ def solution(prices):
 #### 실행시간 및 메모리
 - 최소 : `0.01ms`, `9.99MB`
 - 최대 : `129.64ms`, `19.4MB`
+
+## 다리를 지나는 트럭
+[다리를 지나는 트럭 문제링크](https://school.programmers.co.kr/learn/courses/30/lessons/42583)
+
+#### 소요시간
+- 하루 종일 + 팀원 피드백
+
+#### 간단 풀이 방식
+- 다리에 올라간 트럭들의 무게를 관리하는 리스트 `curBridgeWeight`
+- 다리에 올라간 트럭들의 남은 이동거리를 관리하는 리스트 `curBridgeLength`
+- curBridgeWeight의 합이 weight를 넘지 않으면서, len(curBridgeLength)이 다리길이를 넘지 않는 동안 아래 반복문 수행
+  - 다리에 트럭을 추가할 수 없는 경우
+    - 다리에 새로운 트럭을 넣을 수 있을때까지 먼저 들어온 순으로 트럭을 제거
+    - 제거된 트럭의 남은 길이는 answer에 추가
+  - 다리에 트럭을 추가할 수 있는 경우
+    - 다리에 트럭을 추가
+    - 현재 다리 위에 존재하는 트럭들의 남은 이동거리 -1
+  - 다리 위에 트럭이 남은 경우 남은 이동거리 만큼 answer에 추가
+
+#### Pseudo Code
+```
+'''
+- 일차선 다리를 정해진 순으로
+- 모든 트럭이 다리를 건너려면 최소 몇초가 걸리는지?
+- 다리에는 트럭이 최대 bridge_length대 
+- 다리는 weight 이하의 무게까지 견딜 수 있음.(다리에 완전히 오르지 않은 트럭의 무게는 무시)
+- 다리를 건너는데 걸리는 시간은 bridge_lenght
+
+'''
+
+def updateBridge(bridge, num):
+    # bridge 내에 존재하는 모든 트럭의 남은 이동거리를 num 만큼 감소
+
+def solution(bridge_length, weight, truck_weights):
+    for truck in truck_weights:
+        # 다리에 트럭이 추가가 불가능한 경우
+        if sum(curBridgeWeight) + truck > weight:
+            while(sum(curBridgeWeight) > weight - truck):
+                # 가장 먼저 들어간 트럭부터 모두 지나도록 계산
+                frontOfBridgeLength = curBridgeLength.pop(0)
+                answer += frontOfBridgeLength 
+                curBridgeLength = updateBridge(curBridgeLength, frontOfBridgeLength)
+    
+        # 다리에 트럭이 추가될 수 있는 경우
+        if sum(curBridgeWeight) + truck <= weight and len(curBridgeWeight) < bridge_length:
+            curBridgeWeight.append(truck)
+            curBridgeLength.append(bridge_length)
+            answer += 1
+            
+            # 한 칸씩 이동
+            curBridgeLength = updateBridge(curBridgeLength,1)
+            # 다리를 다 건넌 트럭이 존재하는 경우
+            if curBridgeLength and curBridgeLength[0] == 0:
+                curBridgeLength.pop(0)
+                curBridgeWeight.pop(0)
+    
+    if(len(curBridgeLength) != 0):
+        answer += curBridgeLength[-1]
+    return answer
+```
+#### 시간복잡도
+- for 문 : _O(N)_
+- for문 내부 : _O(N)_
+- 종합 : _O(N^2)_
+
+#### 실행시간 및 메모리
+- 최소 : `0.01ms`, `10.2MB`
+- 최대 : `4.11ms`, `10.3MB`
