@@ -122,3 +122,36 @@ def solution(numbers):
 #### 실행시간 및 메모리
 - 최소 : `0.03ms`, `10.3MB`
 - 최대 : `5.50ms`, `10.3MB`
+
+
+## [카펫](https://school.programmers.co.kr/learn/courses/30/lessons/42842)
+
+#### 소요시간
+- 30분
+
+#### 간단 풀이 방식
+- 노란색으로 만들 수 있는 내부 격자의 비율을 1 부터 나눠가면서 구함
+- 노란색의 w, h가 구해지면, 노란색을 둘러싸기 위한 갈색 타일의 개수와 입력 brown값을 비교
+
+#### Pseudo Code
+```
+def checkEnoughBrown(canW, canH, brown):
+    needBrown = ((canW + 2) * 2) + (canH * 2)
+    if needBrown == brown:
+        return True
+    return False
+
+def solution(brown, yellow):
+    for i in range(1, yellow+1):
+        if yellow % i == 0:
+            if checkEnoughBrown(canW, canH, brown):
+                return [canW + 2, canH + 2]
+
+```
+
+#### 시간복잡도
+- _O(N)_
+
+#### 실행시간 및 메모리
+- 최소 : `0.00ms`, `10.1MB`
+- 최대 : `0.19ms`, `10.1MB`
