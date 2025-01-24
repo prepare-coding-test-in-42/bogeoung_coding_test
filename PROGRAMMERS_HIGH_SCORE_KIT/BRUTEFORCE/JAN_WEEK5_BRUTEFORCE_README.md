@@ -160,3 +160,31 @@ def solution(brown, yellow):
 ## [피로도](https://school.programmers.co.kr/learn/courses/30/lessons/87946)
 
 
+#### 소요시간
+- 2시간 내외
+
+#### 간단 풀이 방식
+- permutation을 활용하여 갈수있는 던전의 모든 조합을 계산
+- 모든 경우의 수를 돌면서 가장 많이 돌 수 있는 던전의 수를 계산
+
+#### Pseudo Code
+```
+for i in range(2, len(dungeons) + 1):
+    perm = permutations(numList, i)
+    for p in perm:
+        permList.append(list(p))
+
+for perm in permList:
+    tempK = k
+    tempAnswer = 0
+    for index in perm:
+        dungeon = dungeons[index]
+        if tempK >= dungeon[0]:
+            tempK -= dungeon[1]
+            tempAnswer += 1
+    answer = max(answer, tempAnswer)
+```
+
+#### 시간복잡도
+- 최소 : `0.05ms`, `10.2MB`
+- 최대 : `160.49ms`, `24MB`
