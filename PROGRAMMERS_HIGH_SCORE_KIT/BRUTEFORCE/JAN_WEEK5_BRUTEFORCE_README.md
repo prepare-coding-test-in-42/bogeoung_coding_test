@@ -155,3 +155,8 @@ def solution(brown, yellow):
 #### 실행시간 및 메모리
 - 최소 : `0.00ms`, `10.1MB`
 - 최대 : `0.19ms`, `10.1MB`
+
+
+## [피로도](https://school.programmers.co.kr/learn/courses/30/lessons/87946)
+
+
