@@ -40,21 +40,56 @@ function solution(n, lost, reserve):
 ## [조이스틱](https://school.programmers.co.kr/learn/courses/30/lessons/42860)
 
 #### 소요시간
-- 아직 못 품
+- 20분 + 검색
 
 #### 간단 풀이 방식
-- ㅜ
+- name의 모든 알파벳에 대해서 `min(조이스틱을 위로 이동하는 것, 조이스틱을 아래로 이동하는 것)`의 값을 `count`에 더함
+- 연속된 `A`가 가장 많은 개수를 찾음
+- 연속된 `A`의 왼쪽과 오른쪽에 있는 문자열 중 짧은 문자열를 한번 더 이동한다 가정하여 짧은 문자열의 길이를 한 번 더 더함
 
+#### 시도했던 내용들
+**TRY 1**
+1. 알파벳 순서에 따라 name에서 오름차순에서 내림차순으로 변경되는 index 혹은 내림차순에서 오름차순으로 변경되는 index 중 min값을 찾기 
+2. index를 기준으로 왼쪽 문자열의 길이, 오른쪽 문자열의 길이 중 짧은 문자열의 길이를 한 번 더 더하기
+-> 이런 경우 연속된 A가 존재할 때 "되돌아 가는게 더 빠른 경우"를 고려하지 못함.
+-> ex) BBAAB라는 문자열이 있을 때 
+  - `index = 2`, `left = 2`, `right = 5-2 = 3`, 따라서 가장 짧은 이동거리는 `전체 문자열 길이 -1` +2 라 생각함.   
+  - 하지만 정답은 뒤에 B 하나만 되돌아 오는 것이 더 빠름.
+    
 #### Pseudo Code
 ```
+Function solution(name):
+    Initialize count = 0
+    Set N as the length of name
+
+    # Step 1: 알파벳 변경 횟수 계산
+    For each character ch in name:
+        Calculate min_up_down as the minimum number of moves needed to change 'A' to ch
+        Add min_up_down to count
+
+    # Step 2: 커서 이동 최소 거리 계산
+    Initialize move as N - 1 (최대 이동 거리)
+
+    For left from 0 to N-1:
+        Set idx = left + 1
+        While idx is within bounds and name[idx] is 'A':
+            Increase idx by 1
+
+        Set right as the number of remaining characters after idx
+        Set back_distance as the minimum value between left and right
+        Update move with the minimum of (move, left + right + back_distance)
+
+    Add move to count
+    Return count
 
 ```
 
 #### 시간복잡도
+- _O(N)_
 
 #### 실행시간 및 메모리
-- 최소 :
-- 최대 :
+- 최소 : `0.01ms`, `9.89MB`
+- 최대 : `0.03ms`, `10.2MB`
 
 ## [큰 수 만들기](https://school.programmers.co.kr/learn/courses/30/lessons/42883)
 
