@@ -114,3 +114,57 @@ def solution(m, n, puddles):
 #### 실행시간 및 메모리
 - 최소 : `1.04ms`, `10.3MB`
 - 최대 : `4.15ms`, `10.3MB`
+
+## [사칙연산](https://school.programmers.co.kr/learn/courses/30/lessons/1843)
+
+#### 소요시간
+- X
+
+#### 간단 풀이 방식
+- 
+
+#### Pseudo Code
+```
+    
+```
+
+#### 시간복잡도
+-
+
+#### 실행시간 및 메모리
+- 최소 :
+- 최대 :
+
+## [도둑질](https://school.programmers.co.kr/learn/courses/30/lessons/42897)
+
+#### 소요시간
+- 30분 + 검색
+
+#### 간단 풀이 방식
+- 처음집부터 털되 `i번째 집 + i-2번째집을 턴 money`와 `i-1번째 집을 터는것의 money`를 비교해서 큰 것을 턴 값을 dp에 저장
+- `처음집을 털고, 마지막집을 털지 않는 경우`, `처음집을 털지 않고, 마지막집을 터는 경우` 2가지를 비교
+
+#### Pseudo Code
+```
+def solution(money):
+    dp1 = [0] * len(money)
+    dp2 = [0] * len(money)
+
+    dp1[0] = money[0]
+    for i in range(1, len(money) - 1):  # 첫번째 집을 털고, 마지막 집을 털지 않는 경우
+        dp1[i] = max(dp1[i - 1], dp1[i - 2] + money[i])
+
+    dp2[0] = 0
+    for i in range(1, len(money)):      # 첫번째 집은 털지 않고, 마지막 집을 터는 경우
+        dp2[i] = max(dp2[i - 1], dp2[i - 2] + money[i])
+
+    return max(dp1[-2], dp2[-1])
+ 
+```
+
+#### 시간복잡도
+- _O(N)_
+
+#### 실행시간 및 메모리
+- 최소 : `0.03ms`, `10.2MB`
+- 최대 : `576.99ms`, `90.4MB`
