@@ -30,7 +30,7 @@ function solution(n, times):
         else:
             left = mid + 1 
 
-    return answer  // 최종 최소 시간 반환
+    return answer  
 ```
 
 #### 시간복잡도
