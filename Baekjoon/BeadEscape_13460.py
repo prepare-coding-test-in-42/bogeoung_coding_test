@@ -9,8 +9,6 @@ n, m = 0, 0
 move_direction = [[0, 1], [0, -1], [1, 0], [-1, 0]]
 
 def input_func():
-    global n
-    global m
     n, m = map(int, input().split())
     input_arr = []
 
@@ -39,8 +37,6 @@ def move(x, y, direction, input_arr):
 
     return x, y, cnt
 def run(r_loc, b_loc, input_arr):
-    global n
-    global m
     visited  = []
     queue = deque()
     r_cur_x, r_cur_y = r_loc
