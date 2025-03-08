@@ -75,7 +75,6 @@ def run(r_loc, b_loc, input_arr):
     print(-1)
 
 
-
 def main():
     n, m, input_arr = input_func()
     r_loc, b_loc = find_color_bead(input_arr)
