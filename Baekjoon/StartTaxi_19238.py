@@ -99,7 +99,10 @@ def run(road_map, taxi, customers):
 
         # 손님을 목적지까지 이동
         cur_customer_dist_map = calc_distance(road_map,taxi.x, taxi.y)
+
         to_destination_distance = cur_customer_dist_map[picked_customer.dest_x][picked_customer.dest_y]
+        if taxi.x != picked_customer.dest_x and taxi.y != picked_customer.dest_y and to_destination_distance == 0:
+            return -1
         taxi.move(picked_customer.dest_x, picked_customer.dest_y, to_destination_distance)
         if taxi.remain_fuel < 0:
             return -1
