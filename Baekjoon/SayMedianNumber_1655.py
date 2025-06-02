@@ -1,26 +1,34 @@
-from sortedcontainers import SortedList
+import sys
+from heapq import *
 
-def input_func():
-    n = int(input())
-
-    numbers = []
-    for _ in range(n):
-        numbers.append(int(input()))
-    return n, numbers
-
-def calc_median_index(numbers):
-    if len(numbers) % 2 == 0: # 중간에 있는 두 수중 작은 숫자
-        return len(numbers) // 2 - 1
-    else:
-        return len(numbers) // 2
+input = sys.stdin.readline
 
 def main():
-    n, numbers = input_func()
-    cur_numbers = SortedList()
-    for i in range(n):
-        cur_numbers.append(numbers[i])
-        # print(i, cur_numbers)
-        print(cur_numbers[calc_median_index(cur_numbers)])
+    n = int(input())
+
+    min_heap = []
+    max_heap = []
+    for _ in range(n):
+        heappush(max_heap, -(int(input())))
+
+        if min_heap and -max_heap[0] > min_heap[0]:
+            to_min = heappop(max_heap)
+            to_max = heappop(min_heap)
+
+            heappush(min_heap, -to_min)
+            heappush(max_heap, -to_max)
+
+        if len(max_heap) - len(min_heap) >= 2:
+            moving_values = heappop(max_heap)
+            heappush(min_heap, -moving_values)
+        elif len(min_heap) - len(max_heap) >= 2:
+            moving_values = heappop(min_heap)
+            heappush(max_heap, -moving_values)
+        print(-max_heap[0])
+
+        # print(f"min_heap : {min_heap}")
+        # print(f"max_heap : {max_heap}")
+
 
 if __name__ == "__main__":
     main()
