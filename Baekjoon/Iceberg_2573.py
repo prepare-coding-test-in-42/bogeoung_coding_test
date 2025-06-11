@@ -87,7 +87,7 @@ def run(ice_map):
         # 빙산이 2개 이상으로 나눠졌다면, 그때의 년도 반환
         if count_iceberg(ice_map) >= 2:
             return year
-        
+
         # 만약 남아있는 얼음의 개수가 없다면 0을 반환
         total_sum = 0
         for i in range(n):
