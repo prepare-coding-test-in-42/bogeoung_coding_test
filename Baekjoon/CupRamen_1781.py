@@ -1,4 +1,7 @@
+import heapq
+
 def input_func():
+    global n
     n = int(input())
 
     ramens = []
@@ -8,26 +11,15 @@ def input_func():
 
     return ramens
 
-
 def calc_max_ramen(ramens):
-    ramens.sort(key=lambda x: [x[0], -x[1]])
+    heap = []
 
-    cur_time = 0
-    ramen_index = 0
-    earning_ramens = 0
-    while cur_time <= ramens[-1][0]:
-        if ramen_index >= len(ramens):
-            return earning_ramens
-        while cur_time >= ramens[ramen_index][0]:
-            ramen_index += 1
-            if ramen_index >= len(ramens):
-                return earning_ramens
-        print(f"earning {ramens[ramen_index][1]} ramens in {cur_time} and due is {ramens[ramen_index][0]}")
-        earning_ramens += ramens[ramen_index][1]
-        ramen_index += 1
-        cur_time += 1
+    for deadline, reward in ramens:
+        heapq.heappush(heap, reward)
+        if len(heap) > deadline:
+            heapq.heappop(heap)
 
-    return earning_ramens
+    return sum(heap)
 
 
 def main():
